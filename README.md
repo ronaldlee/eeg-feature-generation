@@ -1,3 +1,4 @@
+#test
 ## What is this?
 This script will take EEG brainwaves and create a static dataset through a sliding window approach. Overlapping windows consider wave data and many mathematical attributes are generated in order to describe the wave. This means for Machine Learning you're not classifying point-data and thus temporal techniques such as an LSTM are no longer necessary 
 
