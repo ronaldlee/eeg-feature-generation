@@ -12,7 +12,10 @@ Notice that there is a noise column at the end of the CSV, this would be the Rig
 
 Run the following code:
 
-python src/EEG_generate_training_matrix.py dataset/original_data/ out.csv
+python code/EEG_generate_training_matrix.py dataset/original_data/ out.csv
+
+For adding fake timestamps:
+python code/add_timestamps.py dataset_gameemo/original_data
 
 This specifies the feature extraction script, where the data is stored, and where the final dataset will be output.
 
