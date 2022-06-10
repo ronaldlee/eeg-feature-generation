@@ -7,16 +7,16 @@ import numpy as np
 import pandas as pd
 
 
-def add_timestamps(directory_path):
+def add_timestamps(directory_path, drop_last_column=false):
     print("Directory path:", directory_path)
 
     for x in os.listdir(directory_path):
         print("RRRR x:",x)
         df=pd.read_csv(directory_path + "/" + x, sep=',')
 
-        #drop the last unknown column due to extra comma
-        df.drop(df.columns[len(df.columns)-1], axis=1, inplace=True)
-        # df.head
+        if (drop_last_column):
+          #drop the last unknown column due to extra comma
+          df.drop(df.columns[len(df.columns)-1], axis=1, inplace=True)
 
         from datetime import datetime
         import time

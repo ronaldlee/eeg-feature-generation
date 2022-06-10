@@ -92,16 +92,12 @@ participants_data = mat['DREAMER']['Data'][0][0][0]
 
 #for i in [0,1]: #range(len(participants_data)):
 for i in range(len(participants_data)):
-  participant_csv_row_data = []
 
   p = participants_data[i]
   print("Participant:",i)
   print("age:", p['Age'][0][0][0])
   print("gender:", p['Gender'][0][0][0])
 
-  participant_csv_row_data.append(i)
-  participant_csv_row_data.append(p['Age'][0][0][0])
-  participant_csv_row_data.append(p['Gender'][0][0][0])
 
   num_of_samples = len(p['EEG'][0][0][0][0]['baseline'])
   print("num_of_samples:", num_of_samples)
@@ -117,6 +113,10 @@ for i in range(len(participants_data)):
 
     #########################
     # write the participant to csv
+    participant_csv_row_data = []
+    participant_csv_row_data.append(i)
+    participant_csv_row_data.append(p['Age'][0][0][0])
+    participant_csv_row_data.append(p['Gender'][0][0][0])
     participant_csv_row_data.append(j)
     participant_csv_row_data.append(score_arousal)
     participant_csv_row_data.append(score_valence)
