@@ -70,7 +70,7 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
 
         except:
             print ('Wrong file name', x)
-            sys.exit(-1)
+            continue
 
         #based on Arousal-valence scale
         #1 - high arousal positive valence
