@@ -69,7 +69,7 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
             domainance= int(domainance[1:]) 
 
         except:
-            print ('Wrong file name', x)
+            print ('################ Wrong file name ###############', x)
             continue
 
         #based on Arousal-valence scale
