@@ -80,15 +80,18 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
 
         if arousal > 3 and valence > 3:
             state = 1.
-        elif arousal > 3 and valence <= 3:
+        #elif arousal > 3 and valence <= 3:
+        elif arousal > 3 and valence < 3:
             state = 2.
-        elif arousal <= 3 and valence <= 3:
+        #elif arousal <= 3 and valence <= 3:
+        elif arousal < 3 and valence < 3:
             state = 3.
-        elif arousal <= 3 and valence > 3:
+        #elif arousal <= 3 and valence > 3:
+        elif arousal < 3 and valence > 3:
             state = 4.
         else:
-            print ('Wrong file name', x)
-            sys.exit(-1)
+            print ('Invalid arousal/valence:',arousal,"/",valence, x)
+            continue
             
         print("arousal:", arousal, "; valence:", valence, "; state:", state)
 
