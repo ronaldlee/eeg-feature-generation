@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 
-def add_timestamps(directory_path, drop_last_column=false):
+def add_timestamps(directory_path, drop_last_column=False):
     print("Directory path:", directory_path)
 
     for x in os.listdir(directory_path):
