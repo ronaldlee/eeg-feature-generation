@@ -49,13 +49,11 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
         if 'test' in x.lower():
             continue
 
-        if not ('dreamer_p00_s00_a03_v04_d02.csv' in x.lower()):
-            continue
+        #if not ('dreamer_p00_s00_a03_v04_d02.csv' in x.lower()):
+        #    continue
 
         if 'baseline' in x.lower():
             continue
-
-        print("RRR find file")
 
         try:
             #name format: dreamer_p11_s08_a04_v01_d04.csv
