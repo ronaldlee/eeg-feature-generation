@@ -718,20 +718,18 @@ def generate_feature_vectors_from_samples(file_path, nsamples, period, state):
         # Perform the resampling of the vector
         # This is to 'smooth out' the data, and also standardize to the same number of data points (nsamples). 
         # The 'time' might be irregular when collected, so resample just to make the time at regular period.
-        ry, rx = scipy.signal.resample(s[:, 1:], num = nsamples, 
+        features, timestamps = scipy.signal.resample(s[:, 1:], num = nsamples, 
                                  t = s[:, 0], axis = 0)
         
         # Slide the slice by 1/2 period
         t += 0.5 * period
-        
-        print("RRRR rx.shape:",rx.shape)
-        print("RRRR ry.shape:",ry.shape)
 
-        states = np.repeat(3, rx.shape[0])
-        print("RRRR states.shape:",states.shape)
+        timestamps = timestamps[..., None]
 
-        feature_vector = np.vstack((rx, ry, states))
-        print("RRRR feature_vector.shape:", feature_vector.shape)
+        states = np.repeat(3, timestamps.shape[0])
+        states = states[..., None]
+
+        feature_vector = np.hstack((timestamps, features, states))
         
         if ret is None:
             ret = feature_vector
