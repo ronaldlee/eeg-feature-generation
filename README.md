@@ -20,6 +20,10 @@ python code/EEG_generate_training_matrix_gameemo_limited.py dataset_gameemo/orig
 
 python code/EEG_generate_training_matrix_dreamer.py out_dreamer_with_timestamps out_dreamer.csv
 
+python code/EEG_time_domain_feature_extraction.py out_dreamer_with_timestamps out_dreamer.csv
+
+python code/extract_time_domain_features_gameemo.py out_gameemo_time_domain.csv
+
 For adding fake timestamps:
 python code/add_timestamps.py dataset_gameemo/original_data
 
