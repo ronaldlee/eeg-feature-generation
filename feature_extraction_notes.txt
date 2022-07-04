@@ -7,6 +7,8 @@ GAMEEMO:
 
 freq_111_10
 freq_{1}_{2} => what is {1} and {2} for?
+{2} is the signal ID: (0-12, total 13 signals, not 14 channels??)
+{1} is the frequency slot.
 
 
 
@@ -43,6 +45,31 @@ PCA: week 8 (https://github.com/Ishaanidisha/Summer-W207/blob/main/Slides/Week%2
 
 
 "lag1_xxx" are the previous, then the current features..
+
+- feature_logcov
+http://www.stat.rice.edu/~jrojo/4th-Lehmann/slides/Deng.pdf => mentioned about Log-transformed Matrix Estimation
+
+
+- feature_fft
+scipy.fft.fft
+Fast Fourier Transform
+https://www.dataq.com/data-acquisition/general-education-tutorials/fft-fast-fourier-transform-waveform-analysis.html
+...
+Simply stated, the Fourier transform converts waveform data in the time domain into the frequency domain. The Fourier transform accomplishes this by breaking down the original time-based waveform into a series of sinusoidal terms, each with a unique magnitude, frequency, and phase. This process, in effect, converts a waveform in the time domain that is difficult to describe mathematically into a more manageable series of sinusoidal functions that when added together, exactly reproduce the original waveform. 
+"power spectrum"
+"filter_DC": https://dsp.stackexchange.com/questions/12972/discrete-fourier-transform-what-is-the-dc-term-really
+"mains_f": mains frequency = 50 (https://wwwhome.ewi.utwente.nl/~ptdeboer/misc/mains.html#:~:text=The%20mains%20power%20supply%20in,keeping%20track%20of%20the%20time.)
+ -> reduce noise.
+
+
+
+
+
+
+
+
+
+
 
 
 - generate_feature_vectors_from_samples

@@ -656,6 +656,11 @@ def feature_fft(matrix, period = 1., mains_f = 50.,
     indx = np.argsort(fft_values, axis = 0)[::-1]
     indx = indx[:ntop]
     
+    # flatten in column-major (https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html)
+    # a = np.array([[1,2], [3,4]])
+    # a.flatten('F')
+    # array([1, 3, 2, 4])
+    # for 'topFreq_' below
     ret = freqs[indx].flatten(order = 'F')
     
     # Make feature names
