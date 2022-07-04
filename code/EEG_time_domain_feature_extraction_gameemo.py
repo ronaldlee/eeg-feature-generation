@@ -689,7 +689,7 @@ def generate_feature_vectors_from_samples(file_path, nsamples, period, state):
     # Read the matrix from file
     matrix, headers = matrix_from_csv_file(file_path)
 
-    headers.append("Label")
+    headers = np.append(headers,"Label")
     
     # We will start at the very begining of the file
     t = 0.
