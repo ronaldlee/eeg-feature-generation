@@ -1,0 +1,50 @@
+
+
+Power Spectrum
+https://www.sciencedirect.com/topics/engineering/power-spectrum#:~:text=Power%20spectrum%20analysis%20is%20a,to%20as%20its%20power%20spectrum.
+
+GAMEEMO:
+
+freq_111_10
+freq_{1}_{2} => what is {1} and {2} for?
+
+
+
+functions:
+get_time_slice:
+
+scipy.signal.resample?
+ -> resample to have regular 'time' period
+
+
+- feature_moments
+https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm#:~:text=Skewness%20is%20a%20measure%20of,relative%20to%20a%20normal%20distribution.
+
+Skewness is a measure of symmetry, or more precisely, the lack of symmetry. 
+A distribution, or data set, is symmetric if it looks the same to the left and right of the center point.
+
+Kurtosis is a measure of whether the data are heavy-tailed or light-tailed relative to a normal distribution.
+
+
+
+- feature_covariance_matrix
+
+- feature_eigenvalues
+
+Where are eigenvalues used in machine learning?
+This scaler multiple is known as Eigenvalue. Eigenvectors and Eigenvalues are key concepts used in feature extraction techniques such as Principal Component Analysis which is an algorithm used to reduce dimensionality while training a machine learning model.
+
+https://georgemdallas.wordpress.com/2013/10/30/principal-component-analysis-4-dummies-eigenvectors-eigenvalues-and-dimension-reduction/
+An eigenvalue is a number, telling you how much variance there is in the data in that direction
+
+
+PCA: week 8 (https://github.com/Ishaanidisha/Summer-W207/blob/main/Slides/Week%2008.pdf)
+ -> reduce features, find the features that captures can explain most of the data?
+
+
+"lag1_xxx" are the previous, then the current features..
+
+
+- generate_feature_vectors_from_samples
+what is 'nsamples'?
+

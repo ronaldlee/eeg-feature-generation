@@ -498,10 +498,14 @@ def feature_covariance_matrix(matrix):
         Original: [fcampelo]
     """
     
+    #find covariance of the given matrix
     covM = np.cov(matrix.T)
     indx = np.triu_indices(covM.shape[0])
+
+    #ret is a lower-triangular matrix
     ret  = covM[indx]
-    
+
+    #flatten the matrix and only keep values in the lower-triangle 
     names = []
     for i in np.arange(0, covM.shape[1]):
         for j in np.arange(i, covM.shape[1]):
@@ -855,6 +859,8 @@ def generate_feature_vectors_from_samples(file_path, nsamples, period,
             break
         
         # Perform the resampling of the vector
+        # This is to 'smooth out' the data, and also standardize to the same number of data points (nsamples). 
+        # The 'time' might be irregular when collected, so resample just to make the time at regular period.
         ry, rx = scipy.signal.resample(s[:, 1:], num = nsamples, 
                                  t = s[:, 0], axis = 0)
         
