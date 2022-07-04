@@ -80,14 +80,14 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
 
         if arousal > 3 and valence > 3:
             state = 1.
-        #elif arousal > 3 and valence <= 3:
-        elif arousal > 3 and valence < 3:
+        elif arousal > 3 and valence <= 3:
+        #elif arousal > 3 and valence < 3:
             state = 2.
-        #elif arousal <= 3 and valence <= 3:
-        elif arousal < 3 and valence < 3:
+        elif arousal <= 3 and valence <= 3:
+        #elif arousal < 3 and valence < 3:
             state = 3.
-        #elif arousal <= 3 and valence > 3:
-        elif arousal < 3 and valence > 3:
+        elif arousal <= 3 and valence > 3:
+        #elif arousal < 3 and valence > 3:
             state = 4.
         else:
             print ('Invalid arousal/valence:',arousal,"/",valence, x)
@@ -142,4 +142,4 @@ if __name__ == '__main__':
         sys.exit(-1)
     directory_path = sys.argv[1]
     output_file = sys.argv[2]
-    gen_training_matrix(directory_path, output_file, cols_to_ignore = -1)
+    gen_training_matrix(directory_path, output_file, cols_to_ignore = None)
