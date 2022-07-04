@@ -39,9 +39,11 @@ def matrix_from_csv_file(file_path):
     """
     
     csv_data = np.genfromtxt(file_path, delimiter = ',')
+
     full_matrix = csv_data[1:]
-    headers = csv_data[0]
-    
+
+    headers = np.genfromtxt(file_path, delimiter = ',', dtype=str, max_rows=1)
+
     return full_matrix, headers
 
 
@@ -688,7 +690,6 @@ state: label for the feature vector
 def generate_feature_vectors_from_samples(file_path, nsamples, period, state): 
     # Read the matrix from file
     matrix, headers = matrix_from_csv_file(file_path)
-
     headers = np.append(headers,"Label")
     
     # We will start at the very begining of the file
