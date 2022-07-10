@@ -40,9 +40,9 @@ def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
     
     # 38252 is the max sample size, data collected for one participant. Can choose smaller sample size that can
     # divide 38252.
-    sample_size = int(38252/73) #524 timesteps per sample
-    #sample_size = int(38252/131) #292 timesteps per sample
-    #sample_size = int(38252/524) #73 timesteps per sample
+    sample_size = int(38252/73)   #72 batches, 524 timesteps per sample  (batches-1 coz first batch has no previous)
+    #sample_size = int(38252/131)  #130 batches, 292 timesteps per sample
+    #sample_size = int(38252/524)  #523 batches, 73 timesteps per sample
 
     for x in os.listdir(directory_path):
 
@@ -92,7 +92,7 @@ def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
 
         result_matric = header
 
-        output_file = output_dir_path + "/features_" + x
+        output_file = output_dir_path + "/features_sample_size_" + str(sample_size) + "_" + x
 
         np.savetxt(output_file, vectors, delimiter = ',',
                 header = ','.join(header), 

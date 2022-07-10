@@ -45,7 +45,7 @@ def matrix_from_csv_file(file_path):
     return full_matrix
 
 
-def get_samples(full_matrix, start = 0., sample_size = 100.):
+def get_samples(full_matrix, start = 0, sample_size = 100):
     return full_matrix[start:start+sample_size, :]
 
 
@@ -770,7 +770,7 @@ def generate_feature_vectors_from_samples(file_path, sample_size,
     matrix = matrix_from_csv_file(file_path)
     
     # We will start at the very begining of the file
-    index = 0.
+    index = 0
     
     # No previous vector is available at the start
     previous_vector = None
@@ -793,7 +793,7 @@ def generate_feature_vectors_from_samples(file_path, sample_size,
         
         signals = s[:, 1:]
         
-        index += batch_size
+        index += sample_size
         
         # Compute the feature vector. We will be appending the features of the 
         # current time slice and those of the previous one.
@@ -827,7 +827,7 @@ def generate_feature_vectors_from_samples(file_path, sample_size,
         
         # Remove redundancies
         for i in range(len(to_rm)):
-            for j in range(ry.shape[1]):
+            for j in range(signals.shape[1]):
                 rm_str = to_rm[i] + str(j)
                 idx = feat_names.index(rm_str)
                 feat_names.pop(idx)
