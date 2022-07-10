@@ -41,9 +41,9 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
     # 38252 is the max sample size, data collected for one participant. Can choose smaller sample size that can
     # divide 38252.
     TOTAL_RECORDS = 38252
-    sample_size = int(TOTAL_RECORDS/73)   #72 samples, 524 records per sample  (samples-1 coz first batch has no previous)
+    #sample_size = int(TOTAL_RECORDS/73)   #72 samples, 524 records per sample  (samples-1 coz first batch has no previous)
     #sample_size = int(TOTAL_RECORDS/131)  #130 samples, 292 records per sample
-    #sample_size = int(TOTAL_RECORDS/524)  #523 samples, 73 records per sample
+    sample_size = int(TOTAL_RECORDS/524)  #523 samples, 73 records per sample
 
     for x in os.listdir(directory_path):
 
