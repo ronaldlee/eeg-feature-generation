@@ -14,7 +14,7 @@
 
 import os, sys
 import numpy as np
-from EEG_feature_extraction import generate_feature_vectors_from_samples
+from EEG_feature_extraction_by_batch_size import generate_feature_vectors_from_samples
 
 
 def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
@@ -38,6 +38,12 @@ def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
     # Initialise return matrix
     FINAL_MATRIX = None
     
+    # 38252 is the max sample size, data collected for one participant. Can choose smaller sample size that can
+    # divide 38252.
+    sample_size = int(38252/73) #524 timesteps per sample
+    #sample_size = int(38252/131) #292 timesteps per sample
+    #sample_size = int(38252/524) #73 timesteps per sample
+
     for x in os.listdir(directory_path):
 
         # Ignore non-CSV files
@@ -77,8 +83,7 @@ def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
         print ('Using file', x)
         full_file_path = directory_path  +   '/'   + x
         vectors, header = generate_feature_vectors_from_samples(file_path = full_file_path, 
-                                                                nsamples = 150, 
-                                                                period = 1.,
+                                                                sample_size = sample_size,
                                                                 state = state,
                                                                 remove_redundant = True,
                                                                 cols_to_ignore = cols_to_ignore)

@@ -45,8 +45,8 @@ def matrix_from_csv_file(file_path):
     return full_matrix
 
 
-def get_batch_slice(full_matrix, start = 0., batch_size = 100.):
-    return full_matrix[start:start+batch_size, :]
+def get_samples(full_matrix, start = 0., sample_size = 100.):
+    return full_matrix[start:start+sample_size, :]
 
 
 def feature_mean(matrix):
@@ -759,10 +759,10 @@ Returns a number of feature vectors from a labeled CSV file, and a CSV header
 corresponding to the features generated.
 full_file_path: The path of the file to be read
 samples: size of the resampled vector
-batch_size: number of rows per batch to compute features on
+sample_size: number of rows per sample to compute features on
 state: label for the feature vector
 """
-def generate_feature_vectors_from_samples(file_path, nsamples, batch_size, 
+def generate_feature_vectors_from_samples(file_path, sample_size, 
                                           state = None, 
                                           remove_redundant = True,
                                           cols_to_ignore = None):
@@ -781,7 +781,7 @@ def generate_feature_vectors_from_samples(file_path, nsamples, batch_size,
     # Until an exception is raised or a stop condition is met
     while True:
         try:
-            s = get_batch_slice(matrix, start = index, batch_size = batch_size)
+            s = get_samples(matrix, start = index, sample_size = sample_size)
             if cols_to_ignore is not None:
                 s = np.delete(s, cols_to_ignore, axis = 1)
         except IndexError:
