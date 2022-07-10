@@ -17,7 +17,7 @@ import numpy as np
 from EEG_feature_extraction_by_batch_size import generate_feature_vectors_from_samples
 
 
-def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
+def gen_training_matrix(directory_path, output_file, cols_to_ignore):
     """
     Reads the csv files in directory_path and assembles the training matrix with 
     the features extracted using the functions from EEG_feature_extraction.
@@ -40,9 +40,10 @@ def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
     
     # 38252 is the max sample size, data collected for one participant. Can choose smaller sample size that can
     # divide 38252.
-    sample_size = int(38252/73)   #72 batches, 524 timesteps per sample  (batches-1 coz first batch has no previous)
-    #sample_size = int(38252/131)  #130 batches, 292 timesteps per sample
-    #sample_size = int(38252/524)  #523 batches, 73 timesteps per sample
+    TOTAL_RECORDS = 38252
+    sample_size = int(TOTAL_RECORDS/73)   #72 samples, 524 records per sample  (samples-1 coz first batch has no previous)
+    #sample_size = int(TOTAL_RECORDS/131)  #130 samples, 292 records per sample
+    #sample_size = int(TOTAL_RECORDS/524)  #523 samples, 73 records per sample
 
     for x in os.listdir(directory_path):
 
@@ -89,14 +90,20 @@ def gen_training_matrix(directory_path, output_dir_path, cols_to_ignore):
                                                                 cols_to_ignore = cols_to_ignore)
         
         print ('resulting vector shape for the file', vectors.shape)
+        if FINAL_MATRIX is None:
+            FINAL_MATRIX = vectors
+        else:
+            FINAL_MATRIX = np.vstack( [ FINAL_MATRIX, vectors ] )
 
-        result_matric = header
+    print ('FINAL_MATRIX', FINAL_MATRIX.shape)
 
-        output_file = output_dir_path + "/features_sample_size_" + str(sample_size) + "_" + x
+    # Shuffle rows
+    np.random.shuffle(FINAL_MATRIX)
 
-        np.savetxt(output_file, vectors, delimiter = ',',
-                header = ','.join(header), 
-                comments = '')
+    # Save to file
+    np.savetxt("sample_size_" + str(int(TOTAL_RECORDS/sample_size-1)) + "_" + output_file, FINAL_MATRIX, delimiter = ',',
+            header = ','.join(header),
+            comments = '')
 
     return None
 
