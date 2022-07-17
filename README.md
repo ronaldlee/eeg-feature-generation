@@ -18,6 +18,8 @@ python code/EEG_generate_training_matrix_gameemo.py dataset_gameemo/original_dat
 
 python code/EEG_generate_training_matrix_gameemo_limited.py dataset_gameemo/original_data_with_timestamps/ out_gameemo_limited.csv
 
+python code/EEG_generate_training_matrix_gameemo_separate_files.py dataset_gameemo/original_data_with_timestamps/ output_gameemo.csv
+
 python code/EEG_generate_training_matrix_dreamer.py out_dreamer_with_timestamps out_dreamer.csv
 
 python code/EEG_time_domain_feature_extraction.py out_dreamer_with_timestamps out_dreamer.csv

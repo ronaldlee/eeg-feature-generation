@@ -4,3 +4,4 @@
 *.zip
 dataset_dreamer
 *.swp
+*.h5
