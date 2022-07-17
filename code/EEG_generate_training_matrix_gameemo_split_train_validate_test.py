@@ -14,6 +14,7 @@
 
 import os, sys
 import numpy as np
+import random
 from EEG_feature_extraction import generate_feature_vectors_from_samples
 
 
@@ -34,9 +35,6 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
         Original: [lmanso] 
         Updates and documentation: [fcampelo]
     """
-    
-    # Initialise return matrix
-    FINAL_MATRIX = None
     
     participants_map = {}
 
@@ -90,25 +88,20 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
         print ('resulting vector shape for the file', vectors.shape)
         
         if participants_map.get(participant) == None:
+            print("Participant not found:", participant)
             participants_map[participant] = []
 
         participants_map[participant].append(vectors)
-        
-        ```
-        if FINAL_MATRIX is None:
-            FINAL_MATRIX = vectors
-        else:
-            FINAL_MATRIX = np.vstack( [ FINAL_MATRIX, vectors ] )
-        ```    
 
-    #print ('FINAL_MATRIX', FINAL_MATRIX.shape)
     
     keys =  list(participants_map.keys())
-    keys = random.shuffle(keys)
+    random.shuffle(keys)
 
     #get the first 60% as the training data
     number_of_participants = len(keys)
     number_of_training = int(number_of_participants * 0.6)
+
+    print("number_of_training:",number_of_training)
 
     validation_and_test = number_of_participants - number_of_training
 
@@ -116,33 +109,47 @@ def gen_training_matrix(directory_path, output_file, cols_to_ignore):
     number_of_validation = int(validation_and_test * 0.5)
     number_of_test = number_of_participants - number_of_training - number_of_validation
 
+    print("number_of_validation:",number_of_validation)
+    print("number_of_test:",number_of_test)
 
-    train_dataset = []
+    train_dataset = None
     for i in range(number_of_training):
         #participant data for the 4 tests
         participant_data = participants_map[keys[i]]
         for experiment_data in participant_data:
-            train_dataset.append(experiment_data)
+            if train_dataset is None:
+                train_dataset = experiment_data
+            else:    
+                train_dataset = np.vstack( [ train_dataset, experiment_data] )
+
+    #print("train:")
+    #print(train_dataset[0:10])
 
     np.savetxt("out_gameemo_train_dataset.csv", train_dataset, delimiter = ',',
             header = ','.join(header), 
             comments = '')
 
-    validate_dataset = []
+    validate_dataset = None
     for i in range(number_of_training, number_of_training+number_of_validation):
         participant_data = participants_map[keys[i]]
         for experiment_data in participant_data:
-            validate_dataset.append(experiment_data)
+            if validate_dataset is None:
+                validate_dataset = experiment_data
+            else:    
+                validate_dataset = np.vstack( [ validate_dataset, experiment_data] )
 
     np.savetxt("out_gameemo_validate_dataset.csv", validate_dataset, delimiter = ',',
             header = ','.join(header), 
             comments = '')
 
-    test_dataset = []
+    test_dataset = None
     for i in range(number_of_training+number_of_validation, number_of_participants):
         participant_data = participants_map[keys[i]]
         for experiment_data in participant_data:
-            test_dataset.append(experiment_data)
+            if test_dataset is None:
+                test_dataset = experiment_data
+            else:    
+                test_dataset = np.vstack( [ test_dataset, experiment_data] )
 
     np.savetxt("out_gameemo_test_dataset.csv", test_dataset, delimiter = ',',
             header = ','.join(header), 
@@ -155,7 +162,6 @@ if __name__ == '__main__':
     """
     Main function. The parameters for the script are the following:
         [1] directory_path: The directory where the script will look for the files to process.
-        [2] output_file: The filename of the generated output file.
     
     ATTENTION: It will ignore the last column of the CSV file. 
     
@@ -163,9 +169,9 @@ if __name__ == '__main__':
         Original by [lmanso]
         Documentation: [fcampelo]
 """
-    if len(sys.argv) < 3:
-        print ('arg1: input dir\narg2: output file')
+    if len(sys.argv) < 2:
+        print ('arg1: input dir')
         sys.exit(-1)
     directory_path = sys.argv[1]
-    output_file = sys.argv[2]
+    output_file = None
     gen_training_matrix(directory_path, output_file, cols_to_ignore = None)
