@@ -14,7 +14,8 @@
 
 import os, sys
 import numpy as np
-from EEG_time_domain_feature_extraction_gameemo import generate_feature_vectors_from_samples
+#from EEG_time_domain_feature_extraction_gameemo import generate_feature_vectors_from_samples
+from EEG_time_domain_feature_extraction_simple_gameemo import generate_feature_vectors_from_samples
 
 
 def gen_training_matrix(directory_path, output_file, cols_to_ignore):
