@@ -5,3 +5,4 @@
 dataset_dreamer
 *.swp
 *.h5
+*.ipynb_checkpoints
